@@ -1,49 +1,25 @@
-let firstStr = "to be or not to be";
-
-let lettersAndDigits = 'abcdefghijklmnopqrstuvwxyz1234567890';
-let str = "";
 let elementsObject = {};
-let elementsArr = [];
 
-let n = 2; 
+const freq = (n, str) => {
+    // remove unwanted characters and convert the rest to lowercase
+    let sss = str.toLowerCase().replace(/[^a-z0-9]/g, ''); 
+    // counting characters combinations
+    for (var i = 1; i < sss.length; i++) {
+        for (var j = 0; j < sss.length; j++) {
+            let element = sss.substring(j, j + i);
+            elementsObject[element] = (sss.split(element).length - 1);
+        }
+    } 
+    // convert an object into an array
+    let asArray = Object.entries(elementsObject);
+    // filter an array by number of characters 
+    const elementsArr = asArray.filter(([key, value]) => key.length === n);
+    // sort an array from the greatest to the least and limit number of elements to 10
+    let sortedArr = elementsArr.sort((a,b) => {
+        return b[1] - a[1];
+    }).slice(0, 10);
 
-firstStr = firstStr.toLowerCase();
-for (var i = 0; i < firstStr.length; i++) {
-  if (lettersAndDigits.includes(firstStr[i])) {
-    str += firstStr[i];
-  }
+    return sortedArr;
 }
 
-for (var i = 1; i < str.length; i++) {
-  for (var j = 0; j < str.length; j++) {
-    let element = str.substring(j, j + i);
-    elementsObject[element] = (str.split(element).length - 1);
-  }
-}
-
-for (const [key, value] of Object.entries(elementsObject)) {
-  elementsArr.push([key, value]);
-}
-
-for (var i = 0; i < elementsArr.length; i++) {
-  for(var j = 0 ; j < elementsArr.length - i - 1; j++){
-    if (elementsArr[j][1] < elementsArr[j + 1][1]) {
-      var temp = elementsArr[j];
-      elementsArr[j] = elementsArr[j+1];
-      elementsArr[j + 1] = temp;
-    }
-  }
-}
-
-for (var i = 0; i < elementsArr.length; i++) {
-      if (elementsArr[i][0].length !== n){
-        delete elementsArr[i];
-    }
-  }
-
-let x = elementsArr.filter(element => element).slice(0, 10);
-
-console.log(x);
-
-
-// IDK how to solve this task through functional programming. Sorry :( But I wanna learn tho. 
+console.log(freq(3, "abracadabra"));
