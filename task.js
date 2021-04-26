@@ -5,7 +5,7 @@ let str = "";
 let elementsObject = {};
 let elementsArr = [];
 
-let n = 2;
+let n = 2; 
 
 firstStr = firstStr.toLowerCase();
 for (var i = 0; i < firstStr.length; i++) {
@@ -14,10 +14,10 @@ for (var i = 0; i < firstStr.length; i++) {
   }
 }
 
-for (var i = 1;i < str.length; i++) {
-  for (var j = 0;j < str.length; j++) {
-    let element = str.substring(j, j+i);
-    elementsObject[element] = (str.split(element).length-1);
+for (var i = 1; i < str.length; i++) {
+  for (var j = 0; j < str.length; j++) {
+    let element = str.substring(j, j + i);
+    elementsObject[element] = (str.split(element).length - 1);
   }
 }
 
@@ -41,8 +41,9 @@ for (var i = 0; i < elementsArr.length; i++) {
     }
   }
 
-let x = elementsArr.filter(element => element);
+let x = elementsArr.filter(element => element).slice(0, 10);
 
 console.log(x);
+
 
 // IDK how to solve this task through functional programming. Sorry :( But I wanna learn tho. 
